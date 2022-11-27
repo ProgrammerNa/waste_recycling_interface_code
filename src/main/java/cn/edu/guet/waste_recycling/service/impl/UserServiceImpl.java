@@ -4,10 +4,12 @@ import cn.edu.guet.waste_recycling.bean.User;
 import cn.edu.guet.waste_recycling.mapper.IUserMapper;
 import cn.edu.guet.waste_recycling.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @author HHS
  */
+@Service
 public class UserServiceImpl implements IUserService {
 
     @Autowired
