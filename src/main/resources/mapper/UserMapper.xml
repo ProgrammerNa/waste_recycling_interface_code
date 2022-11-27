@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.guet.waste_recycling.mapper.IUserMapper">
+    <resultMap id="BaseResultMap" type="cn.edu.guet.waste_recycling.bean.User">
+        <id column="user_id" jdbcType="BIGINT" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="name"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickName"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy"/>
+        <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
+        <collection property="role" resultMap="RoleResultMap"/>
+    </resultMap>
+    <resultMap id="RoleResultMap" type="cn.edu.guet.waste_recycling.bean.Role">
+        <id column="role_id" jdbcType="BIGINT" property="id"/>
+        <result column="role_name" jdbcType="VARCHAR" property="name"/>
+        <result column="role_remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy"/>
+        <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
+        <result column="del_flag" jdbcType="TINYINT" property="delFlag"/>
+    </resultMap>
+
+    <select id="findUserByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT u.*, r.role_name
+        FROM user u, role r, user_role ur
+        WHERE u.user_id=ur.user_id AND r.role_id=ur.role_id
+        AND username=#{value}
+    </select>
+
+</mapper>
