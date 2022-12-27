@@ -1,5 +1,6 @@
 package cn.edu.guet.waste_recycling.controller;
 
+import cn.edu.guet.waste_recycling.bean.LoginBean;
 import cn.edu.guet.waste_recycling.bean.User;
 import cn.edu.guet.waste_recycling.http.HttpResult;
 import cn.edu.guet.waste_recycling.service.IUserService;
@@ -16,5 +17,9 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-
+    @GetMapping("/getImfo")
+    public HttpResult getUserImfo(@RequestParam String username){
+        User user = userService.findUserByName(username);
+        return HttpResult.ok(user);
+    }
 }
