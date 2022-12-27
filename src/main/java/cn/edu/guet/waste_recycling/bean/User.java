@@ -12,6 +12,7 @@ public class User extends BaseModel {
     private List<Role> role;
     private String nickName;
     private String avatar;
+    private int sex;
     private String password;
     private String email;
     private String mobile;
@@ -47,6 +48,14 @@ public class User extends BaseModel {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
     }
 
     public String getPassword() {
@@ -86,12 +95,12 @@ public class User extends BaseModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return status == user.status && Objects.equals(name, user.name) && Objects.equals(role, user.role) && Objects.equals(nickName, user.nickName) && Objects.equals(avatar, user.avatar) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(mobile, user.mobile);
+        return sex == user.sex && status == user.status && Objects.equals(name, user.name) && Objects.equals(role, user.role) && Objects.equals(nickName, user.nickName) && Objects.equals(avatar, user.avatar) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(mobile, user.mobile);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, role, nickName, avatar, password, email, mobile, status);
+        return Objects.hash(name, role, nickName, avatar, sex, password, email, mobile, status);
     }
 
     @Override
@@ -101,6 +110,7 @@ public class User extends BaseModel {
                 ", role=" + role +
                 ", nickName='" + nickName + '\'' +
                 ", avatar='" + avatar + '\'' +
+                ", sex=" + sex +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", mobile='" + mobile + '\'' +
