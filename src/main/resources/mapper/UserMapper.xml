@@ -27,6 +27,11 @@
         <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
         <result column="del_flag" jdbcType="TINYINT" property="delFlag"/>
     </resultMap>
+    <update id="updateUserImfo">
+        UPDATE user
+        SET nickname=#{nickName},avatar=#{avatar},sex=#{sex},email=#{email},mobile=#{mobile}
+        WHERE username=#{name}
+    </update>
 
     <select id="findUserByName" parameterType="java.lang.String" resultMap="BaseResultMap">
         SELECT u.*, r.role_name

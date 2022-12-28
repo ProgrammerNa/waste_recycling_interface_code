@@ -9,4 +9,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface IUserMapper {
     User findUserByName(String username);
+    boolean updateUserImfo(User user);
 }

@@ -22,4 +22,13 @@ public class UserController {
         User user = userService.findUserByName(username);
         return HttpResult.ok(user);
     }
+
+    @PostMapping("/modifyImfo")
+    public HttpResult modifyUserImfo(@RequestBody User user){
+        if (!userService.updateUserImfo(user)) {
+            return HttpResult.error("修改个人信息失败");
+        }
+        User newUser = userService.findUserByName(user.getName());
+        return HttpResult.ok(newUser);
+    }
 }
