@@ -29,4 +29,9 @@ public class UserServiceImpl implements IUserService {
 //        r = userMapper.updateUserImfo(user);
         return userMapper.updateUserImfo(user);
     }
+
+    @Override
+    public boolean updatePassword(String username, String password) {
+        return userMapper.updatePassword(username, password);
+    }
 }

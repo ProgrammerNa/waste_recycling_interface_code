@@ -1,9 +1,9 @@
 package cn.edu.guet.waste_recycling.controller;
 
-import cn.edu.guet.waste_recycling.bean.LoginBean;
 import cn.edu.guet.waste_recycling.bean.User;
 import cn.edu.guet.waste_recycling.http.HttpResult;
 import cn.edu.guet.waste_recycling.service.IUserService;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,5 +30,20 @@ public class UserController {
         }
         User newUser = userService.findUserByName(user.getName());
         return HttpResult.ok(newUser);
+    }
+
+    @PostMapping("/modifyPassword")
+    public HttpResult modifyPassword(@RequestBody ObjectNode json){
+        String username = json.get("username").toString().replace("\"", "");
+        String password = json.get("password").toString().replace("\"", "");
+        String repassword = json.get("repassword").toString().replace("\"", "");
+
+        if (!password.equals(repassword)) {
+            return HttpResult.error("两次输入的密码不一致");
+        }
+//        if (userService.findUserByName(username) == null) {
+//            return HttpResult.error("账号不存在");
+//        }
+        return HttpResult.ok(userService.updatePassword(username, password));
     }
 }

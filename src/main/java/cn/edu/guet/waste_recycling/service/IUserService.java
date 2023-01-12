@@ -8,4 +8,5 @@ import cn.edu.guet.waste_recycling.bean.User;
 public interface IUserService {
     User findUserByName(String username);
     boolean updateUserImfo(User user);
+    boolean updatePassword(String username, String password);
 }
