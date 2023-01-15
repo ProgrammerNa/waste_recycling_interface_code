@@ -19,6 +19,7 @@ public class UserController {
 
     @PostMapping("/addUser")
     public HttpResult addUser(@RequestBody ObjectNode json){
+        // 把toString 改成 asText就不会出现多的"" ？
         String username = json.get("username").toString().replace("\"", "");
         String password = json.get("password").toString().replace("\"", "");
         String repassword = json.get("repassword").toString().replace("\"", "");

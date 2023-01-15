@@ -30,7 +30,7 @@ public class UserServiceImpl implements IUserService {
     public boolean insertUser(String username, String password, int roleNum) {
         boolean flag = true;
         flag = userMapper.insertUser(username, password);
-        User user = userMapper.findUserByName(username);
+        User user = userMapper.findEasyUser(username);
 
         roleNum = (roleNum == 0) ? 3 : 2;
         flag = userRoleMapper.insertURByUId(user.getId(), roleNum);
