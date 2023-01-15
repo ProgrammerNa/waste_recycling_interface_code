@@ -6,6 +6,8 @@ import cn.edu.guet.waste_recycling.mapper.IUserRoleMapper;
 import cn.edu.guet.waste_recycling.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author HHS
@@ -21,6 +23,18 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User findUserByName(String username) {
         return userMapper.findUserByName(username);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class,propagation = Propagation.REQUIRED)
+    public boolean insertUser(String username, String password, int roleNum) {
+        boolean flag = true;
+        flag = userMapper.insertUser(username, password);
+        User user = userMapper.findUserByName(username);
+
+        roleNum = (roleNum == 0) ? 3 : 2;
+        flag = userRoleMapper.insertURByUId(user.getId(), roleNum);
+        return flag;
     }
 
     @Override

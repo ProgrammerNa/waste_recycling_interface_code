@@ -17,6 +17,19 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
+    @PostMapping("/addUser")
+    public HttpResult addUser(@RequestBody ObjectNode json){
+        String username = json.get("username").toString().replace("\"", "");
+        String password = json.get("password").toString().replace("\"", "");
+        String repassword = json.get("repassword").toString().replace("\"", "");
+        int roleNum = json.get("role").intValue();
+
+        if (!password.equals(repassword)) {
+            return HttpResult.error("注册失败！两次输入的密码不一致");
+        }
+        return HttpResult.ok(userService.insertUser(username, password, roleNum));
+    }
+
     @GetMapping("/getImfo")
     public HttpResult getUserImfo(@RequestParam String username){
         User user = userService.findUserByName(username);
@@ -39,7 +52,7 @@ public class UserController {
         String repassword = json.get("repassword").toString().replace("\"", "");
 
         if (!password.equals(repassword)) {
-            return HttpResult.error("两次输入的密码不一致");
+            return HttpResult.error("修改密码失败！两次输入的密码不一致");
         }
 //        if (userService.findUserByName(username) == null) {
 //            return HttpResult.error("账号不存在");

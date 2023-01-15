@@ -27,6 +27,11 @@
         <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
         <result column="del_flag" jdbcType="TINYINT" property="delFlag"/>
     </resultMap>
+    <insert id="insertUser">
+        INSERT
+        INTO user(username,`password`)
+        VALUES(#{username},#{password})
+    </insert>
     <update id="updateUserImfo">
         UPDATE user
         SET nickname=#{nickName},avatar=#{avatar},sex=#{sex},email=#{email},mobile=#{mobile}
