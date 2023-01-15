@@ -17,9 +17,8 @@ public class Order extends BaseModel {
     public Order() {
     }
 
-    public Order(long userId, long recyclerId, Date date) {
+    public Order(long userId, Date date) {
         this.userId = userId;
-        this.recyclerId = recyclerId;
         this.date = date;
     }
 

@@ -37,7 +37,7 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     @Transactional(rollbackFor = Exception.class,propagation = Propagation.REQUIRED)
-    public boolean insertOrder(Order order) {
+    public boolean insertOrder(Order order) {// 用户下单
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date time = null;
@@ -46,8 +46,8 @@ public class OrderServiceImpl implements IOrderService {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-//        orderMapper.insertOrder(new Order(order.getUserId(),order.getRecyclerId(),time));
-        orderMapper.insertOrder(new Order(1,1,time));
+        orderMapper.insertOrder(new Order(order.getUserId(),time));
+//        orderMapper.insertOrder(new Order(1,1,time));
         long oid = orderMapper.getOrderByDate(sdf.format(time)).getId();
 
         Iterator<OrderDetails> it = order.getDetails().iterator();
