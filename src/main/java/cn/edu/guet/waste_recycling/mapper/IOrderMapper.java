@@ -11,4 +11,6 @@ import java.util.List;
 @Mapper
 public interface IOrderMapper {
     List<Order> getOrders();
+    boolean insertOrder(Order order);
+    Order getOrderByDate(String date);
 }

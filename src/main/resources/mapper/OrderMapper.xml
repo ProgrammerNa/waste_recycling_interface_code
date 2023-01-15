@@ -21,9 +21,19 @@
         <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy"/>
         <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
     </resultMap>
-    <select id="getOrders" resultType="cn.edu.guet.waste_recycling.bean.Order">
+    <insert id="insertOrder">
+        INSERT
+        INTO `order`(user_id,recycler_id,date)
+        VALUES(#{userId},#{recyclerId},#{date})
+    </insert>
+    <select id="getOrders" resultMap="OrderResultMap">
         SELECT o.*,d.*
         FROM `order` o,details d,order_details od
         WHERE o.order_id=od.order_id AND d.details_id=od.details_id
+    </select>
+    <select id="getOrderByDate" resultMap="OrderResultMap">
+        SELECT *
+        FROM `order`
+        WHERE date=#{value}
     </select>
 </mapper>

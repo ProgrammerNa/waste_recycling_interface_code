@@ -1,11 +1,10 @@
 package cn.edu.guet.waste_recycling.controller;
 
+import cn.edu.guet.waste_recycling.bean.Order;
 import cn.edu.guet.waste_recycling.http.HttpResult;
 import cn.edu.guet.waste_recycling.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author HHS
@@ -20,5 +19,10 @@ public class OrderController {
     @GetMapping("/getOrders")
     public HttpResult getOrders(){
         return HttpResult.ok(orderService.getOrders());
+    }
+
+    @PostMapping("/addOrder")
+    public HttpResult addOrder(@RequestBody Order order) {
+        return HttpResult.ok(orderService.insertOrder(order));
     }
 }

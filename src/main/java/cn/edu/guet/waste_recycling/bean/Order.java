@@ -14,6 +14,15 @@ public class Order extends BaseModel {
     private Date date;
     private List<OrderDetails> details;
 
+    public Order() {
+    }
+
+    public Order(long userId, long recyclerId, Date date) {
+        this.userId = userId;
+        this.recyclerId = recyclerId;
+        this.date = date;
+    }
+
     public long getUserId() {
         return userId;
     }
