@@ -35,6 +35,6 @@ public class AreaServiceImpl implements IAreaService {
             if (!children.isEmpty())
                 area.setChildren(children);
         }
-        return list;
+        return tree;
     }
 }
