@@ -4,7 +4,6 @@
     <resultMap id="AreaResultMap" type="cn.edu.guet.waste_recycling.bean.Area">
         <id column="area_id" jdbcType="BIGINT" property="id"/>
         <result column="area_name" jdbcType="VARCHAR" property="name"/>
-        <result column="type" jdbcType="TINYINT" property="type"/>
         <result column="parent_id" jdbcType="BIGINT" property="parentId"/>
         <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
