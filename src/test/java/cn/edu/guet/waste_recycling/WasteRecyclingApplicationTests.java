@@ -3,13 +3,17 @@ package cn.edu.guet.waste_recycling;
 import cn.edu.guet.waste_recycling.bean.Area;
 import cn.edu.guet.waste_recycling.bean.Order;
 import cn.edu.guet.waste_recycling.bean.OrderDetails;
+import cn.edu.guet.waste_recycling.controller.AddressController;
 import cn.edu.guet.waste_recycling.service.IAreaService;
 import cn.edu.guet.waste_recycling.service.IOrderService;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import net.minidev.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @SpringBootTest
@@ -41,4 +45,15 @@ class WasteRecyclingApplicationTests {
         }
     }
 
+    @Test
+    public void testAddAddress() {
+//        ObjectNode object = new ObjectNode(new JSONObject());
+//        object.put("name","1");
+//        object.put("phone","1");
+//        object.put("areaId",1);
+//
+//        object.put("userId",2);
+//        AddressController a = new AddressController();
+//        a.addAddress(object);
+    }
 }

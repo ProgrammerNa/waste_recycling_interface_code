@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.guet.waste_recycling.mapper.IAddressMapper">
+    <resultMap id="AddressResultMap" type="cn.edu.guet.waste_recycling.bean.Address">
+        <id column="address_id" jdbcType="BIGINT" property="id"/>
+        <result column="user_name" jdbcType="VARCHAR" property="name"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="area_id" jdbcType="BIGINT" property="areaId"/>
+        <result column="full_address" jdbcType="VARCHAR" property="fullAddress"/>
+        <result column="is_default" jdbcType="TINYINT" property="isDefault"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy"/>
+        <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
+    </resultMap>
+    <insert id="addAddressToId">
+        INSERT
+        INTO `address`(user_name,phone,area_id,full_address,user_id)
+        VALUES(#{name},#{phone},#{areaId},#{fullAddress},#{userId})
+    </insert>
+    <select id="getAddressById" resultMap="AddressResultMap">
+        SELECT *
+        FROM address
+        WHERE user_id=#{value}
+    </select>
+</mapper>
