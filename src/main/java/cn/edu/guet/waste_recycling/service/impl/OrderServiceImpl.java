@@ -46,15 +46,18 @@ public class OrderServiceImpl implements IOrderService {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        orderMapper.insertOrder(new Order(order.getUserId(),time));
+        // order表新增记录：用户id、期望上门时间、下单时间、上门回收地址id
+        orderMapper.insertOrder(new Order(order.getUserId(), order.getBookDate(), time, order.getAddressId()));
 //        orderMapper.insertOrder(new Order(1,1,time));
-        long oid = orderMapper.getOrderByDate(sdf.format(time)).getId();
+        long oid = orderMapper.getOrderByDate(sdf.format(time)).getId();// 获取订单id
 
-        Iterator<OrderDetails> it = order.getDetails().iterator();
+        Iterator<OrderDetails> it = order.getDetails().iterator();// 获取商品详情
         while (it.hasNext()) {
             OrderDetails orderDetails = it.next();
+            // 详情表新增记录：商品种类id、重量
             detailsMapper.insertDetail(orderDetails);
             long did = orderDetails.getId();
+            // 订单-详情关联表新增记录：订单id、详情id
             orderDetailsMapper.insertOD(oid, did);
         }
         return true;

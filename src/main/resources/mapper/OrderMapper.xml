@@ -6,7 +6,9 @@
         <result column="user_id" jdbcType="BIGINT" property="userId"/>
         <result column="recycler_id" jdbcType="BIGINT" property="recyclerId"/>
         <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="book_date" jdbcType="VARCHAR" property="bookDate"/>
         <result column="date" jdbcType="TIMESTAMP" property="date"/>
+        <result column="address_id" jdbcType="BIGINT" property="addressId"/>
         <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy"/>
@@ -23,8 +25,8 @@
     </resultMap>
     <insert id="insertOrder">
         INSERT
-        INTO `order`(user_id,recycler_id,date)
-        VALUES(#{userId},#{recyclerId},#{date})
+        INTO `order`(user_id,recycler_id,book_date,date,address_id)
+        VALUES(#{userId},#{recyclerId},#{bookDate},#{date},#{addressId})
     </insert>
     <select id="getOrders" resultMap="OrderResultMap">
         SELECT o.*,d.*
