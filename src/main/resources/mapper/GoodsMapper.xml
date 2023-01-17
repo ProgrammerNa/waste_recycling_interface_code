@@ -14,10 +14,11 @@
     <select id="getPriceByName" resultType="java.lang.Double">
         SELECT price
         FROM goods
-        WHERE goods_name=#{value}
+        WHERE goods_name=#{value} AND del_flag=0
     </select>
     <select id="getGoods" resultMap="GoodsResultMap">
         SELECT *
         FROM goods
+        WHERE del_flag=0
     </select>
 </mapper>

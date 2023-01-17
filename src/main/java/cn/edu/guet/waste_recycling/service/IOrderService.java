@@ -10,5 +10,6 @@ import java.util.List;
  */
 public interface IOrderService {
     List<Order> getOrders();
+    List<Order> getOrdersByUId(long id);
     boolean insertOrder(Order order);
 }

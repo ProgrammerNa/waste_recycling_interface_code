@@ -36,6 +36,11 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
+    public List<Order> getOrdersByUId(long id) {
+        return orderMapper.getOrdersByUId(id);
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class,propagation = Propagation.REQUIRED)
     public boolean insertOrder(Order order) {// 用户下单
         Date date = new Date();
