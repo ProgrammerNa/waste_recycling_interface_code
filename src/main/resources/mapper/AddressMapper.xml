@@ -5,7 +5,7 @@
         <id column="address_id" jdbcType="BIGINT" property="id"/>
         <result column="user_name" jdbcType="VARCHAR" property="name"/>
         <result column="phone" jdbcType="VARCHAR" property="phone"/>
-        <result column="area_id" jdbcType="BIGINT" property="areaId"/>
+        <result column="area_name" jdbcType="VARCHAR" property="areaName"/>
         <result column="full_address" jdbcType="VARCHAR" property="fullAddress"/>
         <result column="is_default" jdbcType="TINYINT" property="isDefault"/>
         <result column="user_id" jdbcType="BIGINT" property="userId"/>
@@ -16,8 +16,8 @@
     </resultMap>
     <insert id="addAddressToId">
         INSERT
-        INTO `address`(user_name,phone,area_id,full_address,user_id)
-        VALUES(#{name},#{phone},#{areaId},#{fullAddress},#{userId})
+        INTO `address`(user_name,phone,area_name,full_address,user_id)
+        VALUES(#{name},#{phone},#{areaName},#{fullAddress},#{userId})
     </insert>
     <select id="getAddressById" resultMap="AddressResultMap">
         SELECT *

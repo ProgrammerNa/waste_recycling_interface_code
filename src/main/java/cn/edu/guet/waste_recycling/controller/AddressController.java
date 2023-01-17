@@ -26,9 +26,9 @@ public class AddressController {
     public HttpResult addAddress(@RequestBody ObjectNode json) {
         String name = json.get("name").asText();
         String phone = json.get("phone").asText();
-        long areaId = json.get("areaId").asInt();
+        String areaName = json.get("areaName").asText();
         String fullAddress = json.get("fullAddress").asText();
         long userId = json.get("userId").asInt();
-        return HttpResult.ok(addressService.addAddressToId(new Address(name, phone, areaId, fullAddress, userId)));
+        return HttpResult.ok(addressService.addAddressToId(new Address(name, phone, areaName, fullAddress, userId)));
     }
 }

@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Address extends BaseModel {
     private String name;
     private String phone;
-    private long areaId;
+    private String areaName;
     private String fullAddress;
     private int isDefault;
     private long userId;
@@ -16,10 +16,10 @@ public class Address extends BaseModel {
     public Address() {
     }
 
-    public Address(String name, String phone, long areaId, String fullAddress, long userId) {
+    public Address(String name, String phone, String areaName, String fullAddress, long userId) {
         this.name = name;
         this.phone = phone;
-        this.areaId = areaId;
+        this.areaName = areaName;
         this.fullAddress = fullAddress;
         this.userId = userId;
     }
@@ -40,12 +40,12 @@ public class Address extends BaseModel {
         this.phone = phone;
     }
 
-    public long getAreaId() {
-        return areaId;
+    public String getAreaName() {
+        return areaName;
     }
 
-    public void setAreaId(long areaId) {
-        this.areaId = areaId;
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
     }
 
     public String getFullAddress() {
@@ -77,12 +77,12 @@ public class Address extends BaseModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Address address = (Address) o;
-        return areaId == address.areaId && isDefault == address.isDefault && userId == address.userId && Objects.equals(name, address.name) && Objects.equals(phone, address.phone) && Objects.equals(fullAddress, address.fullAddress);
+        return areaName == address.areaName && isDefault == address.isDefault && userId == address.userId && Objects.equals(name, address.name) && Objects.equals(phone, address.phone) && Objects.equals(fullAddress, address.fullAddress);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, phone, areaId, fullAddress, isDefault, userId);
+        return Objects.hash(name, phone, areaName, fullAddress, isDefault, userId);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class Address extends BaseModel {
         return "Address{" +
                 "name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
-                ", areaId=" + areaId +
+                ", areaId=" + areaName +
                 ", fullAddress='" + fullAddress + '\'' +
                 ", isDefault=" + isDefault +
                 ", userId=" + userId +
