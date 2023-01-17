@@ -19,6 +19,11 @@
         INTO `address`(user_name,phone,area_name,full_address,user_id)
         VALUES(#{name},#{phone},#{areaName},#{fullAddress},#{userId})
     </insert>
+    <update id="updateAddressByAId">
+        UPDATE address
+        SET user_name=#{name},phone=#{phone},area_name=#{areaName},full_address=#{fullAddress}
+        WHERE address_id=#{id}
+    </update>
     <select id="getAddressById" resultMap="AddressResultMap">
         SELECT *
         FROM address

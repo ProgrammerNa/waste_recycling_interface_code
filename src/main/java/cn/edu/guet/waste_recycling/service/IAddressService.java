@@ -9,5 +9,6 @@ import java.util.List;
  */
 public interface IAddressService {
     List<Address> getAddressById(long id);
+    boolean updateAddressByAId(Address address);
     boolean addAddressToId(Address address);
 }

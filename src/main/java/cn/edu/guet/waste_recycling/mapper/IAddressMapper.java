@@ -11,5 +11,6 @@ import java.util.List;
 @Mapper
 public interface IAddressMapper {
     List<Address> getAddressById(long id);
+    boolean updateAddressByAId(Address address);
     boolean addAddressToId(Address address);
 }

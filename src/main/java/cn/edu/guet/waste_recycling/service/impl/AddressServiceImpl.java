@@ -23,6 +23,11 @@ public class AddressServiceImpl implements IAddressService {
     }
 
     @Override
+    public boolean updateAddressByAId(Address address) {
+        return addressMapper.updateAddressByAId(address);
+    }
+
+    @Override
     public boolean addAddressToId(Address address) {
         return addressMapper.addAddressToId(address);
     }

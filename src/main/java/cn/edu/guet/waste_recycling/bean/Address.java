@@ -16,6 +16,13 @@ public class Address extends BaseModel {
     public Address() {
     }
 
+    public Address(String name, String phone, String areaName, String fullAddress) {
+        this.name = name;
+        this.phone = phone;
+        this.areaName = areaName;
+        this.fullAddress = fullAddress;
+    }
+
     public Address(String name, String phone, String areaName, String fullAddress, long userId) {
         this.name = name;
         this.phone = phone;
