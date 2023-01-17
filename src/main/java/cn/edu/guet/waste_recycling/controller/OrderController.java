@@ -4,15 +4,13 @@ import cn.edu.guet.waste_recycling.bean.Order;
 import cn.edu.guet.waste_recycling.bean.OrderDetails;
 import cn.edu.guet.waste_recycling.http.HttpResult;
 import cn.edu.guet.waste_recycling.service.IOrderService;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -35,13 +33,15 @@ public class OrderController {
         long userId = json.get("userId").asInt();
         String bookDate = json.get("bookDate").asText();
         long addressId = json.get("addressId").asInt();
+//        System.out.println("@@@@@@@@@@@@@@@@@@@@"+bookDate);
 
-        ObjectMapper mapper = new ObjectMapper();
+        Iterator<JsonNode> it = json.get("details").iterator();// 用迭代器遍历嵌套内部的json
         List<OrderDetails> details = new ArrayList<>();
-        try {
-            details = mapper.readerFor(new TypeReference<List<OrderDetails>>() {}).readValue(json.get("details"));
-        } catch (IOException e) {
-            e.printStackTrace();
+        while (it.hasNext()) {
+            OrderDetails orderDetails = new OrderDetails();
+            orderDetails.setGoodsId(it.next().asInt());
+            orderDetails.setWeight(it.next().asDouble());
+            details.add(orderDetails);
         }
         return HttpResult.ok(orderService.insertOrder(new Order(userId, bookDate, addressId, details)));
     }
