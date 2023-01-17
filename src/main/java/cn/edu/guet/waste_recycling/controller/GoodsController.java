@@ -18,6 +18,11 @@ public class GoodsController {
     @Autowired
     private IGoodsService goodsService;
 
+    @GetMapping("/getGoods")
+    public HttpResult getGoods() {
+        return HttpResult.ok(goodsService.getGoods());
+    }
+
     @GetMapping("/getPriceByName")
     public HttpResult getPriceByName(@RequestParam String name) {
         // 如果获取的是Goods实体类，要注意delFlag不为0时数据无效（已被删除）

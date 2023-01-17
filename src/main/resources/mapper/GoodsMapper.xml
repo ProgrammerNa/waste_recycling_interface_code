@@ -16,4 +16,8 @@
         FROM goods
         WHERE goods_name=#{value}
     </select>
+    <select id="getGoods" resultMap="GoodsResultMap">
+        SELECT *
+        FROM goods
+    </select>
 </mapper>
