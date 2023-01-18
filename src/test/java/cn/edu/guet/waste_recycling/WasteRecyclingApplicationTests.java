@@ -58,6 +58,11 @@ class WasteRecyclingApplicationTests {
     }
 
     @Test
+    public void testGetOrders() {
+        orderService.getOrders();
+    }
+
+    @Test
     public void testGetOrdersByUId() {
         orderService.getOrdersByUId(18);
     }
