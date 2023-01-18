@@ -13,6 +13,10 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy"/>
         <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
+        <result column="del_flag" jdbcType="TINYINT" property="delFlag"/>
+        <result column="goods_name" jdbcType="VARCHAR" property="goodsName"/>
+        <collection property="details" resultMap="DetailsResultMap"/>
+        <collection property="address" resultMap="AddressResultMap"/>
     </resultMap>
     <resultMap id="DetailsResultMap" type="cn.edu.guet.waste_recycling.bean.OrderDetails">
         <id column="details_id" jdbcType="BIGINT" property="id"/>
@@ -23,12 +27,26 @@
         <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy"/>
         <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
     </resultMap>
+    <resultMap id="AddressResultMap" type="cn.edu.guet.waste_recycling.bean.Address">
+        <id column="address_id" jdbcType="BIGINT" property="id"/>
+        <result column="user_name" jdbcType="VARCHAR" property="name"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="area_name" jdbcType="VARCHAR" property="areaName"/>
+        <result column="full_address" jdbcType="VARCHAR" property="fullAddress"/>
+        <result column="is_default" jdbcType="TINYINT" property="isDefault"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy"/>
+        <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
+    </resultMap>
     <sql id="Base_Column_List">
-        SELECT o.*, d.goods_id, d.weight, a.user_name, a.phone, a.area_name, a.full_address
-        FROM `order` o, details d, order_details od, address a
+        SELECT o.*, goods_name, d.weight, a.user_name, a.phone, a.area_name, a.full_address
+        FROM `order` o, details d, order_details od, address a, goods g
         WHERE o.del_flag=0
         AND o.order_id=od.order_id AND d.details_id=od.details_id
         AND o.address_id=a.address_id
+        AND d.goods_id=g.goods_id
     </sql>
     <insert id="insertOrder">
         INSERT

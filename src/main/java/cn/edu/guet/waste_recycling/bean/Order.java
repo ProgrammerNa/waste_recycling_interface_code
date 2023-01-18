@@ -15,6 +15,9 @@ public class Order extends BaseModel {
     private Date date;
     private long addressId;
     private List<OrderDetails> details;
+    private int delFlag;
+    private Address address;
+    private String goodsName;
 
     public Order() {
     }
@@ -89,17 +92,41 @@ public class Order extends BaseModel {
         this.details = details;
     }
 
+    public int getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(int delFlag) {
+        this.delFlag = delFlag;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return userId == order.userId && recyclerId == order.recyclerId && status == order.status && Objects.equals(bookDate, order.bookDate) && Objects.equals(date, order.date) && Objects.equals(addressId, order.addressId) && Objects.equals(details, order.details);
+        return userId == order.userId && recyclerId == order.recyclerId && status == order.status && addressId == order.addressId && delFlag == order.delFlag && Objects.equals(bookDate, order.bookDate) && Objects.equals(date, order.date) && Objects.equals(details, order.details) && Objects.equals(address, order.address) && Objects.equals(goodsName, order.goodsName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, recyclerId, status, bookDate, date, addressId, details);
+        return Objects.hash(userId, recyclerId, status, bookDate, date, addressId, details, delFlag, address, goodsName);
     }
 
     @Override
@@ -112,6 +139,9 @@ public class Order extends BaseModel {
                 ", date=" + date +
                 ", addressId=" + addressId +
                 ", details=" + details +
+                ", delFlag=" + delFlag +
+                ", address=" + address +
+                ", goodsName='" + goodsName + '\'' +
                 '}';
     }
 }
