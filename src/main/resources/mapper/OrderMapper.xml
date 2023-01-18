@@ -53,6 +53,11 @@
         INTO `order`(user_id,book_date,date,address_id)
         VALUES(#{userId},#{bookDate},#{date},#{addressId})
     </insert>
+    <update id="updateStatus">
+        UPDATE `order`
+        SET status=#{status}
+        WHERE order_id=#{orderId}
+    </update>
     <select id="getOrders" resultMap="OrderResultMap">
         <include refid="Base_Column_List"/>
     </select>

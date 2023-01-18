@@ -67,4 +67,9 @@ public class OrderServiceImpl implements IOrderService {
         }
         return true;
     }
+
+    @Override
+    public boolean updateStatus(long orderId, int status) {
+        return orderMapper.updateStatus(orderId, status);
+    }
 }

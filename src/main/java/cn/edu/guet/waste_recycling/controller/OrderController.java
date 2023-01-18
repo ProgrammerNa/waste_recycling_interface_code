@@ -50,4 +50,11 @@ public class OrderController {
         }
         return HttpResult.ok(orderService.insertOrder(new Order(userId, bookDate, addressId, details)));
     }
+
+    @PostMapping("/updateOrder")
+    public HttpResult updateOrder(@RequestBody ObjectNode json) {
+        long orderId = json.get("orderId").asInt();
+        int status = json.get("status").asInt();
+        return HttpResult.ok(orderService.updateStatus(orderId, status));
+    }
 }
