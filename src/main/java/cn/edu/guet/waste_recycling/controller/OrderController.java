@@ -33,6 +33,11 @@ public class OrderController {
         return HttpResult.ok(orderService.getOrdersByUId(id));
     }
 
+    @GetMapping("/getOrdersByRId")
+    public HttpResult getOrdersByRId(@RequestParam long id){
+        return HttpResult.ok(orderService.getOrdersByRId(id));
+    }
+
     @PostMapping("/addOrder")
     public HttpResult addOrder(@RequestBody ObjectNode json) {
         long userId = json.get("userId").asInt();

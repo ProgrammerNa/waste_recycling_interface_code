@@ -11,5 +11,10 @@
         SET role_id=#{rid}
         WHERE user_id=#{uid}
     </update>
+    <select id="findRoleByUId" resultType="java.lang.Boolean">
+        SELECT role_id
+        FROM user_role
+        WHERE user_id=#{value}
+    </select>
 
 </mapper>

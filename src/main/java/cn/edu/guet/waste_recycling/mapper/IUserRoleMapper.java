@@ -9,4 +9,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface IUserRoleMapper {
     boolean insertURByUId(long uid, long rid);
     boolean updateURByUId(long uid, long rid);
+
+    boolean findRoleByUId(long id);
 }

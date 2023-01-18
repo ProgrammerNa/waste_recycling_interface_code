@@ -10,6 +10,7 @@ import java.util.List;
 public interface IOrderService {
     List<Order> getOrders();
     List<Order> getOrdersByUId(long id);
+    List<Order> getOrdersByRId(long id);
     List<Order> getAcceptableOrders();
 
     boolean insertOrder(Order order);

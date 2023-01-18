@@ -41,6 +41,11 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
+    public List<Order> getOrdersByRId(long id) {
+        return orderMapper.getOrdersByRId(id);
+    }
+
+    @Override
     public List<Order> getAcceptableOrders() {
         return orderMapper.getAcceptableOrders();
     }

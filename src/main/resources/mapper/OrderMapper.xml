@@ -75,6 +75,10 @@
         <include refid="Base_Column_List"/>
         AND o.user_id=#{value}
     </select>
+    <select id="getOrdersByRId" resultMap="OrderResultMap">
+        <include refid="Base_Column_List"/>
+        AND o.recycler_id=#{value}
+    </select>
     <select id="getAcceptableOrders" resultMap="OrderResultMap">
         <include refid="Base_Column_List"/>
         AND ISNULL(recycler_id)

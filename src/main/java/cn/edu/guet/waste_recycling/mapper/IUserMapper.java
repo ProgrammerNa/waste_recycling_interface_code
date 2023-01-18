@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Param;
 public interface IUserMapper {
     User findUserByName(String username);
     User findEasyUser(String username);
+
     boolean insertUser(@Param(value = "username")String username, @Param(value = "password")String password);
     boolean updateUserImfo(User user);
     boolean updatePassword(@Param(value = "username")String username, @Param(value = "password")String password);

@@ -14,6 +14,7 @@ public interface IOrderMapper {
     Order getOrderByDate(String date);
     List<Order> getOrders();
     List<Order> getOrdersByUId(long id);
+    List<Order> getOrdersByRId(long id);
     List<Order> getAcceptableOrders();
 
     boolean insertOrder(Order order);
