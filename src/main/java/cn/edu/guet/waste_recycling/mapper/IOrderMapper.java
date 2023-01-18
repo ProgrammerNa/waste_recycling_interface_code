@@ -14,7 +14,9 @@ public interface IOrderMapper {
     Order getOrderByDate(String date);
     List<Order> getOrders();
     List<Order> getOrdersByUId(long id);
+    List<Order> getAcceptableOrders();
 
     boolean insertOrder(Order order);
     boolean updateStatus(@Param(value = "orderId") long orderId, @Param(value = "status") int status);
+    boolean acceptOrderByRec(@Param(value = "orderId") long orderId, @Param(value = "recyclerId") long recyclerId);
 }

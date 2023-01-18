@@ -14,9 +14,22 @@
         INSERT
         INTO `details`(goods_id,weight)
         VALUES(#{goodsId},#{weight})
-
         <selectKey keyProperty="id" order="AFTER" resultType="long">
             SELECT LAST_INSERT_ID()
         </selectKey>
     </insert>
+    <update id="updateGoodsWeight">
+        UPDATE details
+        SET weight=#{weight}
+        WHERE details_id=#{id}
+    </update>
+    <select id="findId" resultType="java.lang.Long">
+        SELECT details_id
+        FROM details
+        WHERE goods_id=#{goodsId}
+        AND details_id IN
+          (SELECT details_id
+           FROM order_details
+           WHERE order_id=#{orderId})
+    </select>
 </mapper>

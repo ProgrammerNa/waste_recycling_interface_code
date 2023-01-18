@@ -41,7 +41,7 @@
         <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
     </resultMap>
     <sql id="Base_Column_List">
-        SELECT o.*, goods_name, d.weight, a.user_name, a.phone, a.area_name, a.full_address
+        SELECT o.*, d.goods_id, goods_name, d.weight, a.user_name, a.phone, a.area_name, a.full_address
         FROM `order` o, details d, order_details od, address a, goods g
         WHERE o.del_flag=0
         AND o.order_id=od.order_id AND d.details_id=od.details_id
@@ -58,6 +58,11 @@
         SET status=#{status}
         WHERE order_id=#{orderId}
     </update>
+    <update id="acceptOrderByRec">
+        UPDATE `order`
+        SET recycler_id=#{recyclerId}, status=1
+        WHERE order_id=#{orderId}
+    </update>
     <select id="getOrders" resultMap="OrderResultMap">
         <include refid="Base_Column_List"/>
     </select>
@@ -69,5 +74,9 @@
     <select id="getOrdersByUId" resultMap="OrderResultMap">
         <include refid="Base_Column_List"/>
         AND o.user_id=#{value}
+    </select>
+    <select id="getAcceptableOrders" resultMap="OrderResultMap">
+        <include refid="Base_Column_List"/>
+        AND ISNULL(recycler_id)
     </select>
 </mapper>

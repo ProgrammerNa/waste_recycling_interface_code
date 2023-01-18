@@ -41,8 +41,14 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
+    public List<Order> getAcceptableOrders() {
+        return orderMapper.getAcceptableOrders();
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class,propagation = Propagation.REQUIRED)
     public boolean insertOrder(Order order) {// 用户下单
+        // 其实可以直接原始数据插入而不格式化，因为取出来似乎也还要重新处理？
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date time = null;
@@ -71,5 +77,16 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public boolean updateStatus(long orderId, int status) {
         return orderMapper.updateStatus(orderId, status);
+    }
+
+    @Override
+    public boolean acceptOrderByRec(long orderId, long recyclerId) {
+        return orderMapper.acceptOrderByRec(orderId, recyclerId);
+    }
+
+    @Override
+    public boolean updateGoodsWeight(long orderId, long goodsId, double weight) {
+        long id = detailsMapper.findId(orderId, goodsId);
+        return detailsMapper.updateGoodsWeight(id, weight);
     }
 }

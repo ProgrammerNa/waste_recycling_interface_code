@@ -52,9 +52,29 @@ public class OrderController {
     }
 
     @PostMapping("/updateOrderStatus")
-    public HttpResult updateOrder(@RequestBody ObjectNode json) {
+    public HttpResult updateOrderStatus(@RequestBody ObjectNode json) {
         long orderId = json.get("orderId").asInt();
         int status = json.get("status").asInt();
         return HttpResult.ok(orderService.updateStatus(orderId, status));
+    }
+
+    @GetMapping("/getAcceptableOrders")
+    public HttpResult getAcceptableOrders() {
+        return HttpResult.ok(orderService.getAcceptableOrders());
+    }
+
+    @PostMapping("/acceptOrderByRec")
+    public HttpResult acceptOrderByRec(@RequestBody ObjectNode json) {
+        long orderId = json.get("orderId").asInt();
+        long recyclerId = json.get("recyclerId").asInt();
+        return HttpResult.ok(orderService.acceptOrderByRec(orderId, recyclerId));
+    }
+
+    @PostMapping("/updateGoodsWeight")
+    public HttpResult updateGoodsWeight(@RequestBody ObjectNode json) {
+        long orderId = json.get("orderId").asInt();
+        long goodsId = json.get("goodsId").asInt();
+        double weight = json.get("weight").asDouble();
+        return HttpResult.ok(orderService.updateGoodsWeight(orderId, goodsId, weight));
     }
 }
