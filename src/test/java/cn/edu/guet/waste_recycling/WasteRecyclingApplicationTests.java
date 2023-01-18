@@ -56,4 +56,9 @@ class WasteRecyclingApplicationTests {
 //        AddressController a = new AddressController();
 //        a.addAddress(object);
     }
+
+    @Test
+    public void testGetOrdersByUId() {
+        orderService.getOrdersByUId(18);
+    }
 }
