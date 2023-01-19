@@ -41,7 +41,7 @@
         <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
     </resultMap>
     <sql id="Base_Column_List">
-        SELECT o.*, d.goods_id, goods_name, d.weight, a.user_name, a.phone, a.area_name, a.full_address
+        SELECT o.*, d.goods_id, goods_name, price, d.weight, a.user_name, a.phone, a.area_name, a.full_address
         FROM `order` o, details d, order_details od, address a, goods g
         WHERE o.del_flag=0
         AND o.order_id=od.order_id AND d.details_id=od.details_id
