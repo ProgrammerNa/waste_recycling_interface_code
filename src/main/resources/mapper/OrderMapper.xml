@@ -14,9 +14,9 @@
         <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy"/>
         <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
         <result column="del_flag" jdbcType="TINYINT" property="delFlag"/>
-        <result column="goods_name" jdbcType="VARCHAR" property="goodsName"/>
         <collection property="details" resultMap="DetailsResultMap"/>
         <collection property="address" resultMap="AddressResultMap"/>
+        <collection property="goodsItem" resultMap="GoodsResultMap"/>
     </resultMap>
     <resultMap id="DetailsResultMap" type="cn.edu.guet.waste_recycling.bean.OrderDetails">
         <id column="details_id" jdbcType="BIGINT" property="id"/>
@@ -39,6 +39,16 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy"/>
         <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
+    </resultMap>
+    <resultMap id="GoodsResultMap" type="cn.edu.guet.waste_recycling.bean.Goods">
+        <id column="goods_id" jdbcType="BIGINT" property="id"/>
+        <result column="goods_name" jdbcType="VARCHAR" property="name"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy"/>
+        <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
+        <result column="del_flag" jdbcType="TINYINT" property="delFlag"/>
     </resultMap>
     <sql id="Base_Column_List">
         SELECT o.*, d.goods_id, goods_name, price, d.weight, a.user_name, a.phone, a.area_name, a.full_address

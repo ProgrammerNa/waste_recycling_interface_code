@@ -17,7 +17,7 @@ public class Order extends BaseModel {
     private List<OrderDetails> details;
     private int delFlag;
     private Address address;
-    private String goodsName;
+    private Goods goodsItem;
 
     public Order() {
     }
@@ -108,12 +108,12 @@ public class Order extends BaseModel {
         this.address = address;
     }
 
-    public String getGoodsName() {
-        return goodsName;
+    public Goods getGoodsItem() {
+        return goodsItem;
     }
 
-    public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName;
+    public void setGoodsItem(Goods goodsItem) {
+        this.goodsItem = goodsItem;
     }
 
     @Override
@@ -121,12 +121,12 @@ public class Order extends BaseModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return userId == order.userId && recyclerId == order.recyclerId && status == order.status && addressId == order.addressId && delFlag == order.delFlag && Objects.equals(bookDate, order.bookDate) && Objects.equals(date, order.date) && Objects.equals(details, order.details) && Objects.equals(address, order.address) && Objects.equals(goodsName, order.goodsName);
+        return userId == order.userId && recyclerId == order.recyclerId && status == order.status && addressId == order.addressId && delFlag == order.delFlag && Objects.equals(bookDate, order.bookDate) && Objects.equals(date, order.date) && Objects.equals(details, order.details) && Objects.equals(address, order.address) && Objects.equals(goodsItem, order.goodsItem);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, recyclerId, status, bookDate, date, addressId, details, delFlag, address, goodsName);
+        return Objects.hash(userId, recyclerId, status, bookDate, date, addressId, details, delFlag, address, goodsItem);
     }
 
     @Override
@@ -141,7 +141,7 @@ public class Order extends BaseModel {
                 ", details=" + details +
                 ", delFlag=" + delFlag +
                 ", address=" + address +
-                ", goodsName='" + goodsName + '\'' +
+                ", goodsItem=" + goodsItem +
                 '}';
     }
 }
