@@ -25,6 +25,9 @@ public class UserController {
         String repassword = json.get("repassword").toString().replace("\"", "");
         int roleNum = json.get("role").intValue();
 
+        if (username.equals("")) {
+            return HttpResult.error("注册失败！请填写用户名");
+        }
         if (!password.equals(repassword)) {
             return HttpResult.error("注册失败！两次输入的密码不一致");
         }
