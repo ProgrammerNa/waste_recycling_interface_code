@@ -7,12 +7,22 @@ import java.util.Objects;
  */
 public class Application extends BaseModel {
     private long orderId;
-    private int expenses;
-    private String evidence;
+    private double expenses;
     private String picUrl;
+    private String evidence;
     private long auditorId;
     private int status;
     private int isApprove;
+
+    public Application() {
+    }
+
+    public Application(long orderId, double expenses, String picUrl, String evidence) {
+        this.orderId = orderId;
+        this.expenses = expenses;
+        this.picUrl = picUrl;
+        this.evidence = evidence;
+    }
 
     public long getOrderId() {
         return orderId;
@@ -22,20 +32,12 @@ public class Application extends BaseModel {
         this.orderId = orderId;
     }
 
-    public int getExpenses() {
+    public double getExpenses() {
         return expenses;
     }
 
-    public void setExpenses(int expenses) {
+    public void setExpenses(double expenses) {
         this.expenses = expenses;
-    }
-
-    public String getEvidence() {
-        return evidence;
-    }
-
-    public void setEvidence(String evidence) {
-        this.evidence = evidence;
     }
 
     public String getPicUrl() {
@@ -44,6 +46,14 @@ public class Application extends BaseModel {
 
     public void setPicUrl(String picUrl) {
         this.picUrl = picUrl;
+    }
+
+    public String getEvidence() {
+        return evidence;
+    }
+
+    public void setEvidence(String evidence) {
+        this.evidence = evidence;
     }
 
     public long getAuditorId() {
@@ -70,29 +80,4 @@ public class Application extends BaseModel {
         this.isApprove = isApprove;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Application that = (Application) o;
-        return orderId == that.orderId && expenses == that.expenses && auditorId == that.auditorId && status == that.status && isApprove == that.isApprove && Objects.equals(evidence, that.evidence) && Objects.equals(picUrl, that.picUrl);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(orderId, expenses, evidence, picUrl, auditorId, status, isApprove);
-    }
-
-    @Override
-    public String toString() {
-        return "Application{" +
-                "orderId=" + orderId +
-                ", expenses=" + expenses +
-                ", evidence='" + evidence + '\'' +
-                ", picUrl='" + picUrl + '\'' +
-                ", auditorId=" + auditorId +
-                ", status=" + status +
-                ", isApprove=" + isApprove +
-                '}';
-    }
 }

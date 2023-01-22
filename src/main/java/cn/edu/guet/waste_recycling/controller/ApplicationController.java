@@ -4,6 +4,7 @@ import cn.edu.guet.waste_recycling.bean.Application;
 import cn.edu.guet.waste_recycling.http.HttpResult;
 import cn.edu.guet.waste_recycling.service.IApplicationService;
 import cn.edu.guet.waste_recycling.service.IImageService;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,7 +24,12 @@ public class ApplicationController {
     private IImageService imageService;
 
     @PostMapping("/submitApplication")
-    public HttpResult submitApplication(Application application) {
+    public HttpResult submitApplication(@RequestBody ObjectNode json) {
+        long orderId = json.get("orderId").asInt();
+        double expenses = json.get("expenses").asDouble();
+        String picUrl = json.get("picUrl").asText();
+        String evidence = json.get("evidence").asText();
+        Application application = new Application(orderId, expenses, picUrl, evidence);
         return HttpResult.ok(applicationService.submitApplication(application));
     }
 

@@ -4,7 +4,7 @@
     <resultMap id="AreaResultMap" type="cn.edu.guet.waste_recycling.bean.Application">
         <id column="application_id" jdbcType="BIGINT" property="id"/>
         <result column="order_id" jdbcType="BIGINT" property="orderId"/>
-        <result column="expenses" jdbcType="INTEGER" property="expenses"/>
+        <result column="expenses" jdbcType="DOUBLE" property="expenses"/>
         <result column="evidence" jdbcType="VARCHAR" property="evidence"/>
         <result column="pic_url" jdbcType="VARCHAR" property="picUrl"/>
         <result column="auditor_id" jdbcType="BIGINT" property="auditorId"/>

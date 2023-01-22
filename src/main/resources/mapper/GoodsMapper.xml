@@ -4,7 +4,7 @@
     <resultMap id="GoodsResultMap" type="cn.edu.guet.waste_recycling.bean.Goods">
         <id column="goods_id" jdbcType="BIGINT" property="id"/>
         <result column="goods_name" jdbcType="VARCHAR" property="name"/>
-        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="price" jdbcType="DOUBLE" property="price"/>
         <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy"/>
