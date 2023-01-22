@@ -18,11 +18,11 @@ import java.io.IOException;
 public class ImageServiceImpl implements IImageService {
     //将文件写入到本地
     public void uploadimage(MultipartFile file, String orderId) {
-        String path = "D:\\iwrp\\picture\\" + orderId;
+        String path = ".\\picture\\" + orderId;
         File file1 = new File(path);
         if (!file1.exists() && !file1.isDirectory()) {
             System.out.println(path + "路径不存在");
-            file1.mkdir();
+            file1.mkdirs();
         }
 
         FileOutputStream out = null;
@@ -52,7 +52,7 @@ public class ImageServiceImpl implements IImageService {
         FileInputStream in = null;
         ServletOutputStream out = null;
         try {
-            File file = new File("D:\\iwrp\\picture\\" + filename);
+            File file = new File(".\\picture\\" + filename);
             in = new FileInputStream(file);
             out = response.getOutputStream();
             byte[] bytes = new byte[1024 * 10];
