@@ -1,5 +1,6 @@
 package cn.edu.guet.waste_recycling.bean;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -8,19 +9,17 @@ import java.util.Objects;
 public class Application extends BaseModel {
     private long orderId;
     private double expenses;
-    private String picUrl;
     private String evidence;
-    private long auditorId;
     private int status;
     private int isApprove;
+    private List<ApplicationPic> picUrl;
 
     public Application() {
     }
 
-    public Application(long orderId, double expenses, String picUrl, String evidence) {
+    public Application(long orderId, double expenses, String evidence) {
         this.orderId = orderId;
         this.expenses = expenses;
-        this.picUrl = picUrl;
         this.evidence = evidence;
     }
 
@@ -40,28 +39,12 @@ public class Application extends BaseModel {
         this.expenses = expenses;
     }
 
-    public String getPicUrl() {
-        return picUrl;
-    }
-
-    public void setPicUrl(String picUrl) {
-        this.picUrl = picUrl;
-    }
-
     public String getEvidence() {
         return evidence;
     }
 
     public void setEvidence(String evidence) {
         this.evidence = evidence;
-    }
-
-    public long getAuditorId() {
-        return auditorId;
-    }
-
-    public void setAuditorId(long auditorId) {
-        this.auditorId = auditorId;
     }
 
     public int getStatus() {
@@ -80,4 +63,36 @@ public class Application extends BaseModel {
         this.isApprove = isApprove;
     }
 
+    public List<ApplicationPic> getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(List<ApplicationPic> picUrl) {
+        this.picUrl = picUrl;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Application that = (Application) o;
+        return orderId == that.orderId && Double.compare(that.expenses, expenses) == 0 && status == that.status && isApprove == that.isApprove && Objects.equals(evidence, that.evidence) && Objects.equals(picUrl, that.picUrl);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderId, expenses, evidence, status, isApprove, picUrl);
+    }
+
+    @Override
+    public String toString() {
+        return "Application{" +
+                "orderId=" + orderId +
+                ", expenses=" + expenses +
+                ", evidence='" + evidence + '\'' +
+                ", status=" + status +
+                ", isApprove=" + isApprove +
+                ", picUrl=" + picUrl +
+                '}';
+    }
 }

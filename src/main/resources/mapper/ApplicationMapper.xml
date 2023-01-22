@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.guet.waste_recycling.mapper.IApplicationMapper">
-    <resultMap id="AreaResultMap" type="cn.edu.guet.waste_recycling.bean.Application">
+    <resultMap id="ApplicationResultMap" type="cn.edu.guet.waste_recycling.bean.Application">
         <id column="application_id" jdbcType="BIGINT" property="id"/>
         <result column="order_id" jdbcType="BIGINT" property="orderId"/>
         <result column="expenses" jdbcType="DOUBLE" property="expenses"/>
         <result column="evidence" jdbcType="VARCHAR" property="evidence"/>
-        <result column="pic_url" jdbcType="VARCHAR" property="picUrl"/>
-        <result column="auditor_id" jdbcType="BIGINT" property="auditorId"/>
         <result column="status" jdbcType="TINYINT" property="status"/>
         <result column="is_approve" jdbcType="TINYINT" property="isApprove"/>
         <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
@@ -17,7 +15,17 @@
     </resultMap>
     <insert id="submitApplication">
         INSERT
-        INTO application(order_id, expenses, evidence, pic_url)
-        VALUES(#{orderId},#{expenses},#{evidence},#{picUrl})
+        INTO application(order_id, expenses, evidence, create_by, create_time)
+        VALUES(#{orderId},#{expenses},#{evidence},#{createBy},NOW())
     </insert>
+    <update id="updateStatus">
+        UPDATE application
+        SET status=#{status}
+        WHERE application_id=#{id}
+    </update>
+    <select id="getById" resultMap="ApplicationResultMap">
+        SELECT *
+        FROM application
+        WHERE application_id=#{value}
+    </select>
 </mapper>

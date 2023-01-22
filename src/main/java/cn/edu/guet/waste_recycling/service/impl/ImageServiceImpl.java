@@ -1,6 +1,9 @@
 package cn.edu.guet.waste_recycling.service.impl;
 
+import cn.edu.guet.waste_recycling.bean.ApplicationPic;
+import cn.edu.guet.waste_recycling.mapper.IApplicationPicMapper;
 import cn.edu.guet.waste_recycling.service.IImageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -10,14 +13,19 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author HHS
  */
 @Service
 public class ImageServiceImpl implements IImageService {
+
+    @Autowired
+    private IApplicationPicMapper applicationPicMapper;
+
     //将文件写入到本地
-    public void uploadimage(MultipartFile file, String orderId) {
+    public String uploadimage(MultipartFile file, String orderId) {
         String path = ".\\picture\\" + orderId;
         File file1 = new File(path);
         if (!file1.exists() && !file1.isDirectory()) {
@@ -26,9 +34,10 @@ public class ImageServiceImpl implements IImageService {
         }
 
         FileOutputStream out = null;
+        File newFile = null;
         try {
             byte[] bytes = file.getBytes();
-            File newFile = new File(path + "\\" + file.getOriginalFilename());// 获取上传时的文件名
+            newFile = new File(path + "\\" + file.getOriginalFilename());// 获取上传时的文件名
             out = new FileOutputStream(newFile);
             out.write(bytes);
             out.flush();
@@ -45,6 +54,7 @@ public class ImageServiceImpl implements IImageService {
                 e.printStackTrace();
             }
         }
+        return newFile.getAbsolutePath();
     }
 
     //从本地读取文件并返回到网页中
@@ -74,5 +84,10 @@ public class ImageServiceImpl implements IImageService {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public boolean insertImage(List<ApplicationPic> list) {
+        return applicationPicMapper.insertPic(list);
     }
 }
