@@ -5,6 +5,8 @@
         <id column="area_id" jdbcType="BIGINT" property="id"/>
         <result column="area_name" jdbcType="VARCHAR" property="name"/>
         <result column="parent_id" jdbcType="BIGINT" property="parentId"/>
+        <result column="longitude" jdbcType="DOUBLE" property="longitude"/>
+        <result column="latitude" jdbcType="DOUBLE" property="latitude"/>
         <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy"/>
