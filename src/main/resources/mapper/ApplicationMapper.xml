@@ -26,6 +26,9 @@
     <select id="getById" resultMap="ApplicationResultMap">
         SELECT *
         FROM application
-        WHERE application_id=#{value}
+        WHERE order_id IN 
+        <foreach collection="id" item="item" index="index" open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
     </select>
 </mapper>
