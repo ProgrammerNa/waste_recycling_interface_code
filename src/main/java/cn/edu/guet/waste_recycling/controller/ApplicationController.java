@@ -32,6 +32,7 @@ public class ApplicationController {
     private IOrderService orderService;
 
     @PostMapping("/submitApplication")
+    @Transactional(rollbackFor = Exception.class,propagation = Propagation.REQUIRED)
     public HttpResult submitApplication(@RequestBody ObjectNode json) {
         long orderId = json.get("orderId").asInt();
         double expenses = json.get("expenses").asDouble();
@@ -40,9 +41,11 @@ public class ApplicationController {
 
         Application application = new Application(orderId, expenses, evidence);
         application.setCreateBy(String.valueOf(recyclerId));
+        applicationService.submitApplication(application);
 
         // 提交时禁用再次提交
-        return HttpResult.ok(applicationService.submitApplication(application));
+        orderService.updateCanApplication(orderId, 0);
+        return HttpResult.ok();
     }
 
     @PostMapping("/uploadImage")
@@ -78,10 +81,10 @@ public class ApplicationController {
         applicationService.updateStatus(id, status);
 
         long orderId = applicationService.getOrderIdById(id);
-        if (status == -1) {// 订单取消时调用禁用
+        if (status == -1) {// 订单取消时允许申请
             orderService.updateCanApplication(orderId, 1);
         }
-        else {// 订单提交或完成时取消禁用
+        else {// 订单提交或完成时调用禁用
             orderService.updateCanApplication(orderId, 0);
         }
         return HttpResult.ok();
