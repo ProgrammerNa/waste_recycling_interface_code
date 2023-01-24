@@ -19,4 +19,9 @@ public class AreaController {
     public HttpResult getArea(){
         return HttpResult.ok(areaService.getAreas());
     }
+
+    @GetMapping("/getAreaTree")
+    public HttpResult getAreaTree(){
+        return HttpResult.ok(areaService.getAreaTree());
+    }
 }

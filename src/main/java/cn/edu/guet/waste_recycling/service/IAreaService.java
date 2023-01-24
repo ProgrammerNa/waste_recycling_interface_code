@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface IAreaService {
     List<Area> getAreas();
+    List<Area> getAreaTree();
 }
