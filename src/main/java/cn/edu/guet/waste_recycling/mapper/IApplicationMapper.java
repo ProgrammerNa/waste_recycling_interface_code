@@ -12,8 +12,8 @@ import java.util.List;
 @Mapper
 public interface IApplicationMapper {
     List<Application> getById(long id);
+    long getOrderIdById(long id);
 
     boolean submitApplication(Application application);
     boolean updateStatus(@Param(value = "id") long id, @Param(value = "status") int status);
-    boolean updateCanAdd(@Param(value = "id") long id, @Param(value = "canAdd") int canAdd);
 }

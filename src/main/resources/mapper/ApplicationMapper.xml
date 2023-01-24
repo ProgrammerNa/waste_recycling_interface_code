@@ -12,7 +12,6 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy"/>
         <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
-        <result column="can_add" jdbcType="TINYINT" property="canAdd"/>
     </resultMap>
     <insert id="submitApplication">
         INSERT
@@ -24,14 +23,14 @@
         SET status=#{status}
         WHERE application_id=#{id}
     </update>
-    <update id="updateCanAdd">
-        UPDATE application
-        SET can_add=#{canAdd}
-        WHERE application_id=#{id}
-    </update>
     <select id="getById" resultMap="ApplicationResultMap">
         SELECT *
         FROM application
         WHERE create_by=#{value}
+    </select>
+    <select id="getOrderIdById" resultType="java.lang.Long">
+        SELECT order_id
+        FROM application
+        WHERE application_id=#{value}
     </select>
 </mapper>

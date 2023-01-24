@@ -9,8 +9,8 @@ import java.util.List;
  */
 public interface IApplicationService {
     List<Application> getById(long id);
+    long getOrderIdById(long id);
 
     boolean submitApplication(Application application);
     boolean updateStatus(long id, int status);
-    boolean updateCanAdd(long id, int canAdd);
 }

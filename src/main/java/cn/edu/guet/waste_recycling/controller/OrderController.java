@@ -82,4 +82,11 @@ public class OrderController {
         double weight = json.get("weight").asDouble();
         return HttpResult.ok(orderService.updateGoodsWeight(orderId, goodsId, weight));
     }
+
+    @PostMapping("/updateCanApplication")//x
+    public HttpResult updateCanApplication(@RequestBody ObjectNode json) {
+        long id = json.get("orderId").asInt();
+        int canApplication = json.get("canApplication").asInt();
+        return HttpResult.ok(orderService.updateCanApplication(id, canApplication));
+    }
 }

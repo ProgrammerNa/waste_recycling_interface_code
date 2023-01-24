@@ -94,4 +94,9 @@ public class OrderServiceImpl implements IOrderService {
         long id = detailsMapper.findId(orderId, goodsId);
         return detailsMapper.updateGoodsWeight(id, weight);
     }
+
+    @Override
+    public boolean updateCanApplication(long id, int canApplication) {
+        return orderMapper.updateCanApplication(id, canApplication);
+    }
 }

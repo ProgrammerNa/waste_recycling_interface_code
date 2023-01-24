@@ -31,6 +31,11 @@ public class ApplicationServiceImpl implements IApplicationService {
     }
 
     @Override
+    public long getOrderIdById(long id) {
+        return applicationMapper.getOrderIdById(id);
+    }
+
+    @Override
     public boolean submitApplication(Application application) {
         return applicationMapper.submitApplication(application);
     }
@@ -38,10 +43,5 @@ public class ApplicationServiceImpl implements IApplicationService {
     @Override
     public boolean updateStatus(long id, int status) {
         return applicationMapper.updateStatus(id, status);
-    }
-
-    @Override
-    public boolean updateCanAdd(long id, int canAdd) {
-        return applicationMapper.updateCanAdd(id, canAdd);
     }
 }

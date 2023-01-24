@@ -20,4 +20,5 @@ public interface IOrderMapper {
     boolean insertOrder(Order order);
     boolean updateStatus(@Param(value = "orderId") long orderId, @Param(value = "status") int status);
     boolean acceptOrderByRec(@Param(value = "orderId") long orderId, @Param(value = "recyclerId") long recyclerId);
+    boolean updateCanApplication(@Param(value = "id") long id, @Param(value = "canApplication") int canApplication);
 }

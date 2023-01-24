@@ -14,6 +14,7 @@
         <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy"/>
         <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
         <result column="del_flag" jdbcType="TINYINT" property="delFlag"/>
+        <result column="can_application" jdbcType="TINYINT" property="canApplication"/>
         <collection property="details" resultMap="DetailsResultMap"/>
         <collection property="address" resultMap="AddressResultMap"/>
         <collection property="goodsItem" resultMap="GoodsResultMap"/>
@@ -72,6 +73,11 @@
         UPDATE `order`
         SET recycler_id=#{recyclerId}, status=1
         WHERE order_id=#{orderId}
+    </update>
+    <update id="updateCanApplication">
+        UPDATE `order`
+        SET can_application=#{canApplication}
+        WHERE order_id=#{id}
     </update>
     <select id="getOrders" resultMap="OrderResultMap">
         <include refid="Base_Column_List"/>

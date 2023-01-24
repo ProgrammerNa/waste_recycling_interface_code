@@ -17,4 +17,5 @@ public interface IOrderService {
     boolean updateStatus(long orderId, int status);
     boolean acceptOrderByRec(long orderId, long recyclerId);
     boolean updateGoodsWeight(long orderId, long goodsId, double weight);
+    boolean updateCanApplication(long id, int canApplication);
 }

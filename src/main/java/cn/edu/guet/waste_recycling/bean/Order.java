@@ -16,6 +16,7 @@ public class Order extends BaseModel {
     private long addressId;
     private List<OrderDetails> details;
     private int delFlag;
+    private int canApplication;
     private Address address;
     private Goods goodsItem;
 
@@ -100,6 +101,14 @@ public class Order extends BaseModel {
         this.delFlag = delFlag;
     }
 
+    public int getCanApplication() {
+        return canApplication;
+    }
+
+    public void setCanApplication(int canApplication) {
+        this.canApplication = canApplication;
+    }
+
     public Address getAddress() {
         return address;
     }
@@ -121,12 +130,12 @@ public class Order extends BaseModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return userId == order.userId && recyclerId == order.recyclerId && status == order.status && addressId == order.addressId && delFlag == order.delFlag && Objects.equals(bookDate, order.bookDate) && Objects.equals(date, order.date) && Objects.equals(details, order.details) && Objects.equals(address, order.address) && Objects.equals(goodsItem, order.goodsItem);
+        return userId == order.userId && recyclerId == order.recyclerId && status == order.status && addressId == order.addressId && delFlag == order.delFlag && canApplication == order.canApplication && Objects.equals(bookDate, order.bookDate) && Objects.equals(date, order.date) && Objects.equals(details, order.details) && Objects.equals(address, order.address) && Objects.equals(goodsItem, order.goodsItem);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, recyclerId, status, bookDate, date, addressId, details, delFlag, address, goodsItem);
+        return Objects.hash(userId, recyclerId, status, bookDate, date, addressId, details, delFlag, canApplication, address, goodsItem);
     }
 
     @Override
@@ -140,6 +149,7 @@ public class Order extends BaseModel {
                 ", addressId=" + addressId +
                 ", details=" + details +
                 ", delFlag=" + delFlag +
+                ", canApplication=" + canApplication +
                 ", address=" + address +
                 ", goodsItem=" + goodsItem +
                 '}';
