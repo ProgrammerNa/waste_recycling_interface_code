@@ -12,6 +12,7 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy"/>
         <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
+        <result column="can_add" jdbcType="TINYINT" property="canAdd"/>
     </resultMap>
     <insert id="submitApplication">
         INSERT
@@ -23,12 +24,14 @@
         SET status=#{status}
         WHERE application_id=#{id}
     </update>
+    <update id="updateCanAdd">
+        UPDATE application
+        SET can_add=#{canAdd}
+        WHERE application_id=#{id}
+    </update>
     <select id="getById" resultMap="ApplicationResultMap">
         SELECT *
         FROM application
-        WHERE order_id IN 
-        <foreach collection="id" item="item" index="index" open="(" separator="," close=")">
-            #{item.id}
-        </foreach>
+        WHERE create_by=#{value}
     </select>
 </mapper>

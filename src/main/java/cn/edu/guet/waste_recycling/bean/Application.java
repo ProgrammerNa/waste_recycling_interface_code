@@ -13,6 +13,7 @@ public class Application extends BaseModel {
     private int status;
     private int isApprove;
     private List<ApplicationPic> picUrl;
+    private int canAdd;
 
     public Application() {
     }
@@ -71,17 +72,25 @@ public class Application extends BaseModel {
         this.picUrl = picUrl;
     }
 
+    public int getCanAdd() {
+        return canAdd;
+    }
+
+    public void setCanAdd(int canAdd) {
+        this.canAdd = canAdd;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Application that = (Application) o;
-        return orderId == that.orderId && Double.compare(that.expenses, expenses) == 0 && status == that.status && isApprove == that.isApprove && Objects.equals(evidence, that.evidence) && Objects.equals(picUrl, that.picUrl);
+        return orderId == that.orderId && Double.compare(that.expenses, expenses) == 0 && status == that.status && isApprove == that.isApprove && canAdd == that.canAdd && Objects.equals(evidence, that.evidence) && Objects.equals(picUrl, that.picUrl);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(orderId, expenses, evidence, status, isApprove, picUrl);
+        return Objects.hash(orderId, expenses, evidence, status, isApprove, picUrl, canAdd);
     }
 
     @Override
@@ -93,6 +102,7 @@ public class Application extends BaseModel {
                 ", status=" + status +
                 ", isApprove=" + isApprove +
                 ", picUrl=" + picUrl +
+                ", canAdd=" + canAdd +
                 '}';
     }
 }

@@ -1,7 +1,6 @@
 package cn.edu.guet.waste_recycling.mapper;
 
 import cn.edu.guet.waste_recycling.bean.Application;
-import cn.edu.guet.waste_recycling.bean.Order;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,8 +11,9 @@ import java.util.List;
  */
 @Mapper
 public interface IApplicationMapper {
-    List<Application> getById(List<Order> id);
+    List<Application> getById(long id);
 
     boolean submitApplication(Application application);
     boolean updateStatus(@Param(value = "id") long id, @Param(value = "status") int status);
+    boolean updateCanAdd(@Param(value = "id") long id, @Param(value = "canAdd") int canAdd);
 }

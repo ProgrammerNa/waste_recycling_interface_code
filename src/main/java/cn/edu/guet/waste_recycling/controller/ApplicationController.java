@@ -52,7 +52,7 @@ public class ApplicationController {
         imageService.insertImage(list);
     }
 
-    @GetMapping("/getImage")
+    @GetMapping("/getImage")//x
     @ResponseBody
     public void getImage(@RequestParam String filename, @RequestParam HttpServletResponse response){
         imageService.getImage(filename, response);
@@ -68,5 +68,12 @@ public class ApplicationController {
         long id = json.get("applicationId").asInt();
         int status = json.get("status").asInt();
         return HttpResult.ok(applicationService.updateStatus(id, status));
+    }
+
+    @PostMapping("/updateCanAdd")
+    public HttpResult updateCanAdd(@RequestBody ObjectNode json) {
+        long id = json.get("applicationId").asInt();
+        int canAdd = json.get("canAdd").asInt();
+        return HttpResult.ok(applicationService.updateCanAdd(id, canAdd));
     }
 }

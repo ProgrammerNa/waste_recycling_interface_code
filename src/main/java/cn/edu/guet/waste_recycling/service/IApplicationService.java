@@ -12,4 +12,5 @@ public interface IApplicationService {
 
     boolean submitApplication(Application application);
     boolean updateStatus(long id, int status);
+    boolean updateCanAdd(long id, int canAdd);
 }

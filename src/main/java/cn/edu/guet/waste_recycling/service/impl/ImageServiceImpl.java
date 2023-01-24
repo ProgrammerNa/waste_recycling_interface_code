@@ -26,7 +26,7 @@ public class ImageServiceImpl implements IImageService {
 
     //将文件写入到本地
     public String uploadimage(MultipartFile file, String orderId) {
-        String path = ".\\picture\\" + orderId;
+        String path = "D:\\iwrp\\picture\\" + orderId;
         File file1 = new File(path);
         if (!file1.exists() && !file1.isDirectory()) {
             System.out.println(path + "路径不存在");
@@ -62,7 +62,7 @@ public class ImageServiceImpl implements IImageService {
         FileInputStream in = null;
         ServletOutputStream out = null;
         try {
-            File file = new File(".\\picture\\" + filename);
+            File file = new File("D:\\iwrp\\picture\\" + filename);
             in = new FileInputStream(file);
             out = response.getOutputStream();
             byte[] bytes = new byte[1024 * 10];

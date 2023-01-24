@@ -4,10 +4,9 @@ import cn.edu.guet.waste_recycling.bean.Area;
 import cn.edu.guet.waste_recycling.bean.Order;
 import cn.edu.guet.waste_recycling.bean.OrderDetails;
 import cn.edu.guet.waste_recycling.controller.AddressController;
+import cn.edu.guet.waste_recycling.service.IApplicationService;
 import cn.edu.guet.waste_recycling.service.IAreaService;
 import cn.edu.guet.waste_recycling.service.IOrderService;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import net.minidev.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +22,8 @@ class WasteRecyclingApplicationTests {
     IOrderService orderService;
     @Autowired
     IAreaService areaService;
+    @Autowired
+    IApplicationService applicationService;
 
     @Test
     void contextLoads() {
@@ -65,5 +66,10 @@ class WasteRecyclingApplicationTests {
     @Test
     public void testGetOrdersByUId() {
         orderService.getOrdersByUId(18);
+    }
+
+    @Test
+    public void testGetById() {
+        System.out.println(applicationService.getById(1));
     }
 }
