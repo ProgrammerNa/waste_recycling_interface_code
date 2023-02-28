@@ -83,10 +83,20 @@ public class OrderController {
         return HttpResult.ok(orderService.updateGoodsWeight(orderId, goodsId, weight));
     }
 
-    @PostMapping("/updateCanApplication")//x
+    @PostMapping("/updateCanApplication")//x ?
     public HttpResult updateCanApplication(@RequestBody ObjectNode json) {
         long id = json.get("orderId").asInt();
         int canApplication = json.get("canApplication").asInt();
         return HttpResult.ok(orderService.updateCanApplication(id, canApplication));
     }
+
+    @PostMapping("/updateGoodsPrice")
+    public HttpResult updateGoodsPrice(@RequestBody ObjectNode json) {
+        long orderId = json.get("orderId").asInt();
+        long goodsId = json.get("goodsId").asInt();
+        double ifPrice = json.get("ifPrice").asDouble();
+        return HttpResult.ok(orderService.updateGoodsPrice(orderId, goodsId, ifPrice));
+    }
+
+
 }

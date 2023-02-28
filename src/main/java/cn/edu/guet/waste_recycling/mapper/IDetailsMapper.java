@@ -13,4 +13,5 @@ public interface IDetailsMapper {
 
     boolean insertDetail(OrderDetails orderDetails);// 插入详情记录并返回其id
     boolean updateGoodsWeight(@Param(value = "id") long id, @Param(value = "weight") double weight);
+    boolean updateGoodsPrice(@Param(value = "id") long id,@Param(value = "ifPrice") double ifPrice);
 }

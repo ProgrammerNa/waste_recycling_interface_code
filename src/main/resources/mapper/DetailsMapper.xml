@@ -5,6 +5,7 @@
         <id column="details_id" jdbcType="BIGINT" property="id"/>
         <result column="goods_id" jdbcType="BIGINT" property="goodsId"/>
         <result column="weight" jdbcType="DECIMAL" property="weight"/>
+        <result column="if_price" jdbcType="DECIMAL" property="ifPrice"/>
         <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy"/>
@@ -21,6 +22,11 @@
     <update id="updateGoodsWeight">
         UPDATE details
         SET weight=#{weight}
+        WHERE details_id=#{id}
+    </update>
+    <update id="updateGoodsPrice">
+        UPDATE details
+        SET if_price=#{ifPrice}
         WHERE details_id=#{id}
     </update>
     <select id="findId" resultType="java.lang.Long">

@@ -23,6 +23,7 @@
         <id column="details_id" jdbcType="BIGINT" property="id"/>
         <result column="goods_id" jdbcType="BIGINT" property="goodsId"/>
         <result column="weight" jdbcType="DECIMAL" property="weight"/>
+        <result column="if_price" jdbcType="DECIMAL" property="ifPrice"/>
         <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy"/>
@@ -52,7 +53,7 @@
         <result column="del_flag" jdbcType="TINYINT" property="delFlag"/>
     </resultMap>
     <sql id="Base_Column_List">
-        SELECT o.*, d.goods_id, goods_name, price, d.weight, a.user_name, a.phone, a.area_name, a.full_address
+        SELECT o.*, d.goods_id, goods_name, price, d.weight, d.if_price, a.user_name, a.phone, a.area_name, a.full_address
         FROM `order` o, details d, order_details od, address a, goods g
         WHERE o.del_flag=0
         AND o.order_id=od.order_id AND d.details_id=od.details_id
