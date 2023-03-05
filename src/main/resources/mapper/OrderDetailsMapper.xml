@@ -6,4 +6,9 @@
         INTO `order_details`(order_id,details_id)
         VALUES(#{oid},#{did})
     </insert>
+    <select id="getDidByOid" resultType="java.lang.Long">
+        SELECT details_id
+        FROM order_details
+        WHERE order_id=#{value}
+    </select>
 </mapper>

@@ -38,4 +38,9 @@
            FROM order_details
            WHERE order_id=#{orderId})
     </select>
+    <select id="findDetailsByDId" resultMap="DetailsResultMap">
+        SELECT *
+        FROM details
+        WHERE details_id=#{value}
+    </select>
 </mapper>

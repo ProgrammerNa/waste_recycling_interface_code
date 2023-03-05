@@ -12,4 +12,5 @@ import java.util.List;
 public interface IGoodsMapper {
     List<Goods> getGoods();
     double getPriceByName(String name);
+    double getPriceById(long id);
 }

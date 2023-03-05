@@ -98,5 +98,10 @@ public class OrderController {
         return HttpResult.ok(orderService.updateGoodsPrice(orderId, goodsId, ifPrice));
     }
 
-
+    @PostMapping("/orderStatistics")
+    public HttpResult orderStatistics(@RequestBody ObjectNode json) {
+        long id = json.get("id").asInt();// 用户id
+        String year = json.get("year").asText();// 传参需要统计的年份
+        return HttpResult.ok(orderService.orderStatistics(id, year));
+    }
 }

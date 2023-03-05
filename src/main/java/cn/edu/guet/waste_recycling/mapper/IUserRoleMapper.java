@@ -10,5 +10,5 @@ public interface IUserRoleMapper {
     boolean insertURByUId(long uid, long rid);
     boolean updateURByUId(long uid, long rid);
 
-    boolean findRoleByUId(long id);
+    long findRoleByUId(long id);
 }

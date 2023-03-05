@@ -2,9 +2,7 @@ package cn.edu.guet.waste_recycling.service.impl;
 
 import cn.edu.guet.waste_recycling.bean.Order;
 import cn.edu.guet.waste_recycling.bean.OrderDetails;
-import cn.edu.guet.waste_recycling.mapper.IDetailsMapper;
-import cn.edu.guet.waste_recycling.mapper.IOrderDetailsMapper;
-import cn.edu.guet.waste_recycling.mapper.IOrderMapper;
+import cn.edu.guet.waste_recycling.mapper.*;
 import cn.edu.guet.waste_recycling.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,9 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author HHS
@@ -29,6 +25,10 @@ public class OrderServiceImpl implements IOrderService {
     private IDetailsMapper detailsMapper;
     @Autowired
     private IOrderDetailsMapper orderDetailsMapper;
+    @Autowired
+    private IUserRoleMapper userRoleMapper;
+    @Autowired
+    private IGoodsMapper goodsMapper;
 
     @Override
     public List<Order> getOrders() {
@@ -104,5 +104,103 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public boolean updateCanApplication(long id, int canApplication) {
         return orderMapper.updateCanApplication(id, canApplication);
+    }
+
+    @Override
+    public Map<String, List<Double>> orderStatistics(long id, String year) {
+        List<Order> list = orderMapper.getOrderStatistics(id, year);// 某年的订单id和时间统计
+        int len = list.size();
+        List<String> dateList = new ArrayList<>();
+
+        // 将月份数据都处理成yyyy-mm的格式
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+        for (int i = 0;i < len;i++) {
+            String date = sdf.format(list.get(i).getDate());
+            dateList.add(date);
+        }
+
+        long rid = userRoleMapper.findRoleByUId(id);
+        double profit = 0;
+        double firstProfit = 0;
+        // 计算第一个的profit
+        if (rid == 2) {// 回收员收益=本月接单数x佣金（每单10）
+            firstProfit = 10;
+        }
+        else if (rid == 3) {// 普通用户收益=本月下单商品获利
+            firstProfit = computeUserProfit(list.get(0).getId());
+        }
+
+        List<Double> totalList = new ArrayList<>();// 月份对应的总订单量和收益
+        Map<String, List<Double>> map = new HashMap<>();// 月份及月份对应的统计数据
+        for (int i = 1, count = 1;i < len; i++) {
+            String stemp = dateList.get(i - 1);// 这里的dateList可以全部换成从list中取然后处理数据***
+
+            // 问题：计算了第一个以后，此处会被覆盖
+            // 根据不同用户类型 计算收益【注意status=-1是被取消的订单，算单量不算收益】
+            if (list.get(i).getStatus() != -1) {
+                if (rid == 2) {// 回收员收益=本月接单数x佣金（每单10）
+                    profit += 10;
+                }
+                else if (rid == 3) {// 普通用户收益=本月下单商品获利
+                    // 要根据count决定遍历次数，即对应本月每一单的收益
+                    // 依次从list里取oid传参
+                    profit += computeUserProfit(list.get(i).getId());
+                }
+            }
+
+            // 计算单量，存数据
+            if (!dateList.get(i).equals(stemp)) {
+                totalList.add(Double.valueOf(count));
+                if (i == 1)
+                    totalList.add(firstProfit);
+                else
+                    totalList.add(profit);
+                map.put(stemp, totalList);
+
+                totalList = new ArrayList<>();
+                count = 1;
+                profit = 0;
+            }
+            else {
+                count++;
+            }
+
+            // 最后一个元素的情况：如果不同，此时已经把前加入，需要加自身 count=1；如果同，此时把count加入
+            if (i == len - 1) {
+                if (!dateList.get(i).equals(stemp)) {
+                    totalList.add(1.0);
+                }
+                else {
+                    totalList.add(Double.valueOf(count));
+                }
+
+                if (i == 1)
+                    totalList.add(firstProfit);
+                else
+                    totalList.add(profit);
+
+                map.put(dateList.get(i), totalList);
+            }
+        }
+
+        return map;
+    }
+
+    @Override
+    public double computeUserProfit(long oid) {// 计算普通用户本单商品获利
+        double profit = 0;
+
+        long did = orderDetailsMapper.getDidByOid(oid);
+        // 按理来说此处可能获得许多个商品/did（List），再遍历一个个获取商品信息
+        OrderDetails orderDetails = detailsMapper.findDetailsByDId(did);
+        double ifPrice = orderDetails.getIfPrice();
+        double weight = orderDetails.getWeight();
+        if (ifPrice != 0) {// 数据库里为null，取出是0吗？******
+            profit = ifPrice * weight;
+        }
+        else {
+            profit = goodsMapper.getPriceById(orderDetails.getGoodsId()) * weight;
+        }
+        return profit;
     }
 }
