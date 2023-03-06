@@ -29,6 +29,11 @@
         SET if_price=#{ifPrice}
         WHERE details_id=#{id}
     </update>
+    <update id="updateGoodsWeightAPrice">
+        UPDATE details
+        SET if_price=#{ifPrice},weight=#{weight}
+        WHERE details_id=#{id}
+    </update>
     <select id="findId" resultType="java.lang.Long">
         SELECT details_id
         FROM details

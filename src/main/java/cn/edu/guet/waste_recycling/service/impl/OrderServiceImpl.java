@@ -102,6 +102,13 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
+    public boolean updateGoodsWeightAPrice(long orderId, long goodsId, double weight, double ifPrice) {
+        long id = detailsMapper.findId(orderId, goodsId);
+        return detailsMapper.updateGoodsWeightAPrice(id, weight, ifPrice);
+    }
+
+
+    @Override
     public boolean updateCanApplication(long id, int canApplication) {
         return orderMapper.updateCanApplication(id, canApplication);
     }

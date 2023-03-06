@@ -19,6 +19,7 @@ public interface IOrderService {
     boolean acceptOrderByRec(long orderId, long recyclerId);
     boolean updateGoodsWeight(long orderId, long goodsId, double weight);
     boolean updateGoodsPrice(long orderId, long goodsId, double ifPrice);
+    boolean updateGoodsWeightAPrice(long orderId, long goodsId, double weight, double ifPrice);
     boolean updateCanApplication(long id, int canApplication);
 
     Map<String, List<Double>> orderStatistics(long id, String year);
