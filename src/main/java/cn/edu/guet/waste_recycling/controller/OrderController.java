@@ -81,7 +81,7 @@ public class OrderController {
         long goodsId = json.get("goodsId").asInt();
         double weight = json.get("weight").asDouble();
         double ifPrice = json.get("ifPrice").asDouble();
-        return HttpResult.ok(orderService.updateGoodsWeight(orderId, goodsId, weight));
+        return HttpResult.ok(orderService.updateGoodsWeightAPrice(orderId, goodsId, weight, ifPrice));
     }
 
 //    @PostMapping("/updateGoodsWeight")
