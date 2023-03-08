@@ -103,7 +103,8 @@
     <select id="getOrderStatistics" resultMap="OrderResultMap">
         SELECT order_id, date
         FROM `order`
-        WHERE (user_id=#{id} OR recycler_id=#{id})
+        WHERE status=2
+        AND (user_id=#{id} OR recycler_id=#{id})
         AND date LIKE CONCAT(#{year}, '%')
     </select>
 </mapper>

@@ -115,7 +115,7 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public Map<String, List<Double>> orderStatistics(long id, String year) {
-        List<Order> list = orderMapper.getOrderStatistics(id, year);// 某年的订单id和时间统计
+        List<Order> list = orderMapper.getOrderStatistics(id, year);// 某年已完成的订单id和时间统计
         int len = list.size();
         List<String> dateList = new ArrayList<>();
 
@@ -132,41 +132,46 @@ public class OrderServiceImpl implements IOrderService {
         // 计算第一个的profit
         if (rid == 2) {// 回收员收益=本月接单数x佣金（每单10）
             firstProfit = 10;
-        }
-        else if (rid == 3) {// 普通用户收益=本月下单商品获利
+        } else if (rid == 3) {// 普通用户收益=本月下单商品获利
             firstProfit = computeUserProfit(list.get(0).getId());
         }
 
         List<Double> totalList = new ArrayList<>();// 月份对应的总订单量和收益
         Map<String, List<Double>> map = new HashMap<>();// 月份及月份对应的统计数据
+        if (len == 1) {
+            totalList.add(1.0);
+            totalList.add(firstProfit);
+            map.put(dateList.get(0), totalList);
+        }
+
         for (int i = 1, count = 1;i < len; i++) {
             String stemp = dateList.get(i - 1);// 这里的dateList可以全部换成从list中取然后处理数据***
 
             // 问题：计算了第一个以后，此处会被覆盖
-            // 根据不同用户类型 计算收益【注意status=-1是被取消的订单，算单量不算收益】
-            if (list.get(i).getStatus() != -1) {
-                if (rid == 2) {// 回收员收益=本月接单数x佣金（每单10）
-                    profit += 10;
-                }
-                else if (rid == 3) {// 普通用户收益=本月下单商品获利
-                    // 要根据count决定遍历次数，即对应本月每一单的收益
-                    // 依次从list里取oid传参
-                    profit += computeUserProfit(list.get(i).getId());
-                }
+            // 根据不同用户类型 计算收益
+            if (rid == 2) {// 回收员收益=本月接单数x佣金（每单10）
+                profit += 10;
+            }
+            else if (rid == 3) {// 普通用户收益=本月下单商品获利
+                // 要根据count决定遍历次数，即对应本月每一单的收益
+                // 依次从list里取oid传参
+                profit += computeUserProfit(list.get(i).getId());
             }
 
             // 计算单量，存数据
             if (!dateList.get(i).equals(stemp)) {
                 totalList.add(Double.valueOf(count));
-                if (i == 1)
+                if (i == 1) {
                     totalList.add(firstProfit);
-                else
+                }
+                else {
                     totalList.add(profit);
+                }
                 map.put(stemp, totalList);
 
                 totalList = new ArrayList<>();
                 count = 1;
-                profit = 0;
+                profit = 0;//*****
             }
             else {
                 count++;
@@ -183,8 +188,17 @@ public class OrderServiceImpl implements IOrderService {
 
                 if (i == 1)
                     totalList.add(firstProfit);
-                else
+                else {
+                    if (rid == 2) {// 回收员收益=本月接单数x佣金（每单10）
+                        profit = 10;
+                    }
+                    else if (rid == 3) {// 普通用户收益=本月下单商品获利
+                        // 要根据count决定遍历次数，即对应本月每一单的收益
+                        // 依次从list里取oid传参
+                        profit = computeUserProfit(list.get(i).getId());
+                    }
                     totalList.add(profit);
+                }
 
                 map.put(dateList.get(i), totalList);
             }
